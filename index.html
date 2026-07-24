@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dhrushaj Achar — Software Engineer</title>
+<meta name="description" content="Portfolio of Dhrushaj Achar — CS undergrad at PES University. Backend engineering, real-time audio ML, and AI-powered developer tools.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+<style>
+  :root {
+    --bg: #070a12;
+    --bg-soft: #0c1120;
+    --card: rgba(255,255,255,0.03);
+    --card-border: rgba(255,255,255,0.08);
+    --text: #e8ecf4;
+    --muted: #8b94a7;
+    --accent: #22d3ee;
+    --accent2: #a78bfa;
+    --accent3: #f472b6;
+    --grad: linear-gradient(100deg, #22d3ee, #a78bfa 55%, #f472b6);
+    --mono: 'JetBrains Mono', monospace;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', system-ui, sans-serif;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+  h1, h2, h3 { font-family: 'Space Grotesk', sans-serif; }
+  a { color: inherit; text-decoration: none; }
+  ::selection { background: rgba(34,211,238,0.3); }
+
+  /* ---- background ---- */
+  .bg-grid {
+    position: fixed; inset: 0; z-index: -2;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+    background-size: 56px 56px;
+    mask-image: radial-gradient(ellipse 90% 70% at 50% 0%, black 40%, transparent 100%);
+    -webkit-mask-image: radial-gradient(ellipse 90% 70% at 50% 0%, black 40%, transparent 100%);
+  }
+  .orb {
+    position: fixed; border-radius: 50%; filter: blur(110px); z-index: -1;
+    opacity: 0.35; pointer-events: none;
+  }
+  .orb-1 { width: 480px; height: 480px; background: #164e63; top: -140px; left: -120px; animation: drift 18s ease-in-out infinite alternate; }
+  .orb-2 { width: 420px; height: 420px; background: #3b0764; top: 30%; right: -160px; animation: drift 22s ease-in-out infinite alternate-reverse; }
+  .orb-3 { width: 380px; height: 380px; background: #500724; bottom: -120px; left: 25%; animation: drift 26s ease-in-out infinite alternate; opacity: 0.25; }
+  @keyframes drift {
+    from { transform: translate(0,0) scale(1); }
+    to { transform: translate(60px, 40px) scale(1.15); }
+  }
+
+  /* ---- scroll progress ---- */
+  #progress {
+    position: fixed; top: 0; left: 0; height: 3px; width: 0%;
+    background: var(--grad); z-index: 100;
+    box-shadow: 0 0 12px rgba(167,139,250,0.7);
+  }
+
+  /* ---- nav ---- */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 90;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 18px clamp(20px, 5vw, 64px);
+    transition: background 0.3s, backdrop-filter 0.3s, border-color 0.3s;
+    border-bottom: 1px solid transparent;
+  }
+  nav.scrolled {
+    background: rgba(7,10,18,0.75);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom-color: rgba(255,255,255,0.06);
+  }
+  .logo {
+    font-family: var(--mono); font-weight: 500; font-size: 1.05rem;
+    letter-spacing: 0.5px;
+  }
+  .logo span { color: var(--accent); }
+  .nav-links { display: flex; gap: 28px; align-items: center; }
+  .nav-links a {
+    font-size: 0.9rem; color: var(--muted); font-weight: 500;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--text); }
+  .nav-links a.cta {
+    color: var(--bg); background: var(--grad); padding: 8px 18px;
+    border-radius: 8px; font-weight: 600;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .nav-links a.cta:hover { transform: translateY(-2px); box-shadow: 0 6px 24px rgba(34,211,238,0.35); }
+  @media (max-width: 720px) { .nav-links a:not(.cta) { display: none; } }
+
+  /* ---- layout ---- */
+  section { max-width: 1080px; margin: 0 auto; padding: 90px clamp(20px, 5vw, 40px); }
+  .section-tag {
+    font-family: var(--mono); font-size: 0.8rem; color: var(--accent);
+    letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px;
+  }
+  .section-title { font-size: clamp(1.7rem, 3.5vw, 2.4rem); margin-bottom: 36px; }
+
+  /* ---- hero ---- */
+  .hero {
+    min-height: 100vh; display: flex; flex-direction: column;
+    justify-content: center; padding-top: 120px;
+  }
+  .hero-greet {
+    font-family: var(--mono); color: var(--accent); font-size: 1rem;
+    margin-bottom: 14px;
+  }
+  .hero h1 {
+    font-size: clamp(2.6rem, 7vw, 4.8rem); line-height: 1.05;
+    letter-spacing: -1.5px; font-weight: 700;
+  }
+  .hero h1 .grad {
+    background: var(--grad); -webkit-background-clip: text; background-clip: text;
+    color: transparent;
+    background-size: 200% auto;
+    animation: shine 6s linear infinite;
+  }
+  @keyframes shine { to { background-position: 200% center; } }
+  .hero-role {
+    font-family: var(--mono); font-size: clamp(1rem, 2.2vw, 1.3rem);
+    color: var(--muted); margin: 22px 0 26px; min-height: 1.6em;
+  }
+  .hero-role .caret {
+    display: inline-block; width: 9px; height: 1.15em; background: var(--accent);
+    vertical-align: text-bottom; margin-left: 3px; animation: blink 1s step-end infinite;
+  }
+  @keyframes blink { 50% { opacity: 0; } }
+  .hero-blurb { max-width: 620px; color: var(--muted); font-size: 1.05rem; }
+  .hero-actions { display: flex; gap: 14px; margin-top: 36px; flex-wrap: wrap; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 9px;
+    padding: 12px 24px; border-radius: 10px; font-weight: 600; font-size: 0.95rem;
+    transition: transform 0.2s, box-shadow 0.2s, background 0.2s, border-color 0.2s;
+    border: 1px solid var(--card-border);
+  }
+  .btn.primary { background: var(--grad); color: #06090f; border: none; }
+  .btn.primary:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(34,211,238,0.35); }
+  .btn.ghost { color: var(--text); background: var(--card); }
+  .btn.ghost:hover { transform: translateY(-3px); border-color: rgba(34,211,238,0.5); }
+  .btn svg { width: 18px; height: 18px; fill: currentColor; }
+
+  .hero-stats {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 14px; margin-top: 64px; max-width: 780px;
+  }
+  .stat {
+    background: var(--card); border: 1px solid var(--card-border);
+    border-radius: 14px; padding: 18px 20px;
+    transition: transform 0.25s, border-color 0.25s;
+  }
+  .stat:hover { transform: translateY(-4px); border-color: rgba(167,139,250,0.5); }
+  .stat b {
+    display: block; font-family: 'Space Grotesk'; font-size: 1.6rem;
+    background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .stat span { font-size: 0.82rem; color: var(--muted); }
+
+  /* ---- reveal animation ---- */
+  .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.visible { opacity: 1; transform: none; }
+
+  /* ---- about ---- */
+  .about-grid { display: grid; grid-template-columns: 1fr 300px; gap: 48px; align-items: center; }
+  @media (max-width: 800px) { .about-grid { grid-template-columns: 1fr; } }
+  .about-text p { color: var(--muted); margin-bottom: 16px; font-size: 1.02rem; }
+  .about-text strong { color: var(--text); font-weight: 600; }
+  .avatar-card {
+    position: relative; border-radius: 20px; padding: 3px;
+    background: var(--grad); justify-self: center;
+  }
+  .avatar-inner {
+    width: 260px; height: 300px; border-radius: 17px; background: var(--bg-soft);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 14px; overflow: hidden;
+  }
+  .avatar-inner img { width: 100%; height: 100%; object-fit: cover; }
+  .monogram {
+    font-family: 'Space Grotesk'; font-size: 4.5rem; font-weight: 700;
+    background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .avatar-label { font-family: var(--mono); font-size: 0.75rem; color: var(--muted); letter-spacing: 1px; }
+
+  /* ---- skills ---- */
+  .skill-groups { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 18px; }
+  .skill-card {
+    background: var(--card); border: 1px solid var(--card-border);
+    border-radius: 16px; padding: 24px;
+    transition: transform 0.25s, border-color 0.25s;
+  }
+  .skill-card:hover { transform: translateY(-4px); border-color: rgba(34,211,238,0.45); }
+  .skill-card h3 { font-size: 1rem; margin-bottom: 14px; display: flex; align-items: center; gap: 10px; }
+  .skill-card h3 .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--grad); }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .chip {
+    font-family: var(--mono); font-size: 0.78rem; padding: 6px 12px;
+    border-radius: 999px; background: rgba(255,255,255,0.045);
+    border: 1px solid rgba(255,255,255,0.09); color: #c3cad8;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .chip:hover { border-color: var(--accent); color: var(--accent); }
+
+  /* ---- experience ---- */
+  .xp-card {
+    background: var(--card); border: 1px solid var(--card-border);
+    border-radius: 18px; padding: 32px; position: relative; overflow: hidden;
+  }
+  .xp-card::before {
+    content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px;
+    background: var(--grad);
+  }
+  .xp-head { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-bottom: 6px; }
+  .xp-head h3 { font-size: 1.25rem; }
+  .xp-date { font-family: var(--mono); font-size: 0.82rem; color: var(--accent); }
+  .xp-org { color: var(--accent2); font-weight: 600; margin-bottom: 16px; }
+  .xp-card ul { list-style: none; }
+  .xp-card li { color: var(--muted); margin-bottom: 10px; padding-left: 22px; position: relative; }
+  .xp-card li::before { content: '▹'; position: absolute; left: 0; color: var(--accent); }
+
+  /* ---- projects ---- */
+  .projects-grid { display: grid; gap: 24px; }
+  .project {
+    background: var(--card); border: 1px solid var(--card-border);
+    border-radius: 18px; padding: 30px;
+    display: grid; grid-template-columns: 1fr auto; gap: 20px;
+    transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s;
+    position: relative;
+  }
+  .project:hover {
+    transform: translateY(-5px); border-color: rgba(167,139,250,0.5);
+    box-shadow: 0 18px 44px rgba(0,0,0,0.45);
+  }
+  @media (max-width: 640px) { .project { grid-template-columns: 1fr; } }
+  .project h3 { font-size: 1.3rem; margin-bottom: 4px; }
+  .project h3 a { background-image: linear-gradient(var(--accent), var(--accent)); background-size: 0% 2px; background-repeat: no-repeat; background-position: left bottom; transition: background-size 0.3s; }
+  .project:hover h3 a { background-size: 100% 2px; }
+  .project-sub { font-family: var(--mono); font-size: 0.78rem; color: var(--accent); margin-bottom: 14px; }
+  .project p.desc { color: var(--muted); margin-bottom: 14px; }
+  .project ul { list-style: none; margin-bottom: 16px; }
+  .project li { color: var(--muted); font-size: 0.92rem; margin-bottom: 8px; padding-left: 20px; position: relative; }
+  .project li::before { content: '▹'; position: absolute; left: 0; color: var(--accent2); }
+  .project .chips { margin-top: auto; }
+  .project-links { display: flex; flex-direction: column; gap: 10px; align-items: flex-end; }
+  @media (max-width: 640px) { .project-links { flex-direction: row; align-items: center; } }
+  .plink {
+    display: inline-flex; align-items: center; gap: 7px;
+    font-size: 0.85rem; font-weight: 600; color: var(--accent);
+    padding: 8px 16px; border: 1px solid rgba(34,211,238,0.35); border-radius: 8px;
+    transition: background 0.2s, transform 0.2s; white-space: nowrap;
+  }
+  .plink:hover { background: rgba(34,211,238,0.12); transform: translateY(-2px); }
+  .plink svg { width: 15px; height: 15px; fill: currentColor; }
+  .badge-live {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-family: var(--mono); font-size: 0.7rem; color: #4ade80;
+    padding: 4px 10px; border-radius: 999px; background: rgba(74,222,128,0.1);
+    border: 1px solid rgba(74,222,128,0.3);
+  }
+  .badge-live .pulse {
+    width: 7px; height: 7px; border-radius: 50%; background: #4ade80;
+    animation: pulse 1.8s ease-out infinite;
+  }
+  @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(74,222,128,0.6); } 70% { box-shadow: 0 0 0 8px rgba(74,222,128,0); } 100% { box-shadow: 0 0 0 0 rgba(74,222,128,0); } }
+
+  /* ---- education & achievements ---- */
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  @media (max-width: 800px) { .two-col { grid-template-columns: 1fr; } }
+  .edu-item {
+    background: var(--card); border: 1px solid var(--card-border);
+    border-radius: 16px; padding: 24px; margin-bottom: 16px;
+  }
+  .edu-item h3 { font-size: 1.05rem; margin-bottom: 4px; }
+  .edu-item .org { color: var(--accent2); font-size: 0.9rem; font-weight: 600; }
+  .edu-item .meta { font-family: var(--mono); font-size: 0.78rem; color: var(--muted); margin-top: 6px; }
+  .edu-item .score { color: var(--accent); font-weight: 600; }
+  .ach-list { list-style: none; }
+  .ach-list li {
+    background: var(--card); border: 1px solid var(--card-border);
+    border-radius: 14px; padding: 16px 20px 16px 46px; margin-bottom: 12px;
+    color: var(--muted); position: relative; font-size: 0.95rem;
+    transition: border-color 0.2s;
+  }
+  .ach-list li:hover { border-color: rgba(244,114,182,0.45); }
+  .ach-list li::before { content: '🏆'; position: absolute; left: 16px; top: 15px; font-size: 0.9rem; }
+  .ach-list li.cert::before { content: '📜'; }
+  .ach-list li.music::before { content: '🎸'; }
+  .ach-list li strong { color: var(--text); }
+
+  /* ---- contact ---- */
+  .contact { text-align: center; padding-bottom: 60px; }
+  .contact p { color: var(--muted); max-width: 520px; margin: 0 auto 32px; }
+  .contact-links { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+
+  footer {
+    text-align: center; padding: 28px; color: var(--muted);
+    font-family: var(--mono); font-size: 0.78rem;
+    border-top: 1px solid rgba(255,255,255,0.05);
+  }
+  footer a { color: var(--accent); }
+</style>
+</head>
+<body>
+<div class="bg-grid"></div>
+<div class="orb orb-1"></div>
+<div class="orb orb-2"></div>
+<div class="orb orb-3"></div>
+<div id="progress"></div>
+
+<nav id="nav">
+  <a class="logo" href="#top">&lt;<span>DA</span> /&gt;</a>
+  <div class="nav-links">
+    <a href="#about">About</a>
+    <a href="#skills">Skills</a>
+    <a href="#experience">Experience</a>
+    <a href="#projects">Projects</a>
+    <a href="#education">Education</a>
+    <a class="cta" href="mailto:dhrushaj.achar@gmail.com">Get in touch</a>
+  </div>
+</nav>
+
+<section class="hero" id="top">
+  <div class="hero-greet">Hi, my name is</div>
+  <h1>Dhrushaj Achar.<br><span class="grad">I build software that ships.</span></h1>
+  <div class="hero-role"><span id="typed"></span><span class="caret"></span></div>
+  <p class="hero-blurb">
+    Computer Science undergrad at <strong style="color:var(--text)">PES University, Bengaluru</strong> —
+    I've built diagnostic software for defense systems at BEL, a real-time neural voice
+    isolator that runs on CPU, and AI-powered developer tools. I care about clean
+    architecture, measurable performance, and code that actually works in production.
+  </p>
+  <div class="hero-actions">
+    <a class="btn primary" href="#projects">View my work</a>
+    <a class="btn ghost" href="https://github.com/PES2UG23CS171" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.55v-2.15c-3.2.7-3.87-1.36-3.87-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.03 1.75 2.69 1.25 3.34.95.1-.74.4-1.25.72-1.54-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.28 1.18-3.09-.12-.29-.51-1.46.11-3.05 0 0 .96-.31 3.16 1.18a11 11 0 0 1 5.76 0c2.19-1.49 3.15-1.18 3.15-1.18.63 1.59.24 2.76.12 3.05.74.81 1.18 1.83 1.18 3.09 0 4.41-2.69 5.38-5.26 5.66.41.36.78 1.05.78 2.13v3.16c0 .3.2.67.8.55A11.52 11.52 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z"/></svg>
+      GitHub
+    </a>
+    <a class="btn ghost" href="https://www.linkedin.com/in/dhrushaj-achar-9795941b0" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.55C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.72C24 .77 23.2 0 22.22 0z"/></svg>
+      LinkedIn
+    </a>
+    <a class="btn ghost" href="https://leetcode.com/u/Dhrushaj/" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24"><path d="M13.48 0a1.37 1.37 0 0 0-.96.44L5.52 7.96l-3.9 3.9a1.37 1.37 0 0 0 0 1.94l7.9 7.9 2.02 2.02c.53.53 1.4.53 1.94 0a1.37 1.37 0 0 0 0-1.94l-2.03-2.02-6.93-6.93 6.9-7.35 2.05-2.18A1.37 1.37 0 0 0 13.48 0zm3.05 6.9a1.37 1.37 0 0 0-.97 2.34l3.63 3.63-3.63 3.63a1.37 1.37 0 1 0 1.94 1.94l4.6-4.6a1.37 1.37 0 0 0 0-1.94l-4.6-4.6a1.37 1.37 0 0 0-.97-.4zM8.62 10.63a1.37 1.37 0 1 0 0 2.74h9.6a1.37 1.37 0 1 0 0-2.74h-9.6z"/></svg>
+      LeetCode
+    </a>
+  </div>
+  <div class="hero-stats">
+    <div class="stat"><b>8.7</b><span>CGPA at PES University</span></div>
+    <div class="stat"><b>200+</b><span>LeetCode problems (C++)</span></div>
+    <div class="stat"><b>3×</b><span>CNR Rao Merit Scholarship</span></div>
+    <div class="stat"><b>17.7 dB</b><span>SI-SDR real-time denoising</span></div>
+  </div>
+</section>
+
+<section id="about" class="reveal">
+  <div class="section-tag">01 · About</div>
+  <h2 class="section-title">A builder at the intersection of systems &amp; AI</h2>
+  <div class="about-grid">
+    <div class="about-text">
+      <p>
+        I'm a third-year B.Tech CSE student at <strong>PES University, Bengaluru</strong>
+        (Class of 2027), awarded the CNR Rao Merit Scholarship three times for staying in
+        the top 20% of my cohort.
+      </p>
+      <p>
+        My work spans a wide range: <strong>backend engineering</strong> with Java &amp; Spring Boot,
+        <strong>real-time audio ML</strong> with PyTorch and ONNX Runtime, and <strong>LLM-powered
+        developer tooling</strong> with local models, RAG, and FAISS. At Bharat Electronics Limited,
+        I shipped diagnostic software for the Akash Weapon System — code held to defense-grade
+        reliability standards.
+      </p>
+      <p>
+        Off the keyboard: ABRSM Grade 6 guitarist, Model UN participant, and a daily
+        LeetCode grinder with a soft spot for dynamic programming and graph algorithms.
+      </p>
+    </div>
+    <div class="avatar-card">
+      <div class="avatar-inner" id="avatar">
+        <img src="photo.jpg" alt="Dhrushaj Achar">
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills" class="reveal">
+  <div class="section-tag">02 · Skills</div>
+  <h2 class="section-title">Tools I reach for</h2>
+  <div class="skill-groups">
+    <div class="skill-card">
+      <h3><span class="dot"></span>Languages</h3>
+      <div class="chips">
+        <span class="chip">C++ (primary · DSA)</span><span class="chip">Java</span>
+        <span class="chip">Python</span><span class="chip">SQL</span><span class="chip">C</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <h3><span class="dot"></span>Backend</h3>
+      <div class="chips">
+        <span class="chip">Spring Boot</span><span class="chip">Spring MVC</span>
+        <span class="chip">JPA / Hibernate</span><span class="chip">REST API design</span>
+        <span class="chip">Maven</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <h3><span class="dot"></span>AI / ML &amp; Audio</h3>
+      <div class="chips">
+        <span class="chip">PyTorch</span><span class="chip">ONNX Runtime</span>
+        <span class="chip">scikit-learn</span><span class="chip">RAG / FAISS</span>
+        <span class="chip">Ollama (local LLMs)</span><span class="chip">Real-time audio</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <h3><span class="dot"></span>Databases · Tools</h3>
+      <div class="chips">
+        <span class="chip">MySQL</span><span class="chip">PostgreSQL</span>
+        <span class="chip">Git</span><span class="chip">GitHub Actions</span>
+        <span class="chip">Docker</span><span class="chip">Linux</span><span class="chip">Postman</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="experience" class="reveal">
+  <div class="section-tag">03 · Experience</div>
+  <h2 class="section-title">Where I've worked</h2>
+  <div class="xp-card">
+    <div class="xp-head">
+      <h3>Software Engineering Intern</h3>
+      <span class="xp-date">Jun 2025 — Jul 2025</span>
+    </div>
+    <div class="xp-org">Bharat Electronics Limited (BEL) · Bengaluru</div>
+    <ul>
+      <li>Built front-end diagnostic software for the functional keyboard of the <strong style="color:var(--text)">Akash Weapon System</strong> using Qt/QML, enabling operators to test and validate mission-critical hardware interfaces.</li>
+      <li>Delivered software for a defense production environment under strict reliability and review standards, collaborating with cross-functional hardware and software teams.</li>
+    </ul>
+  </div>
+</section>
+
+<section id="projects" class="reveal">
+  <div class="section-tag">04 · Projects</div>
+  <h2 class="section-title">Things I've built</h2>
+  <div class="projects-grid">
+
+    <div class="project">
+      <div>
+        <span class="badge-live"><span class="pulse"></span>LIVE</span>
+        <h3 style="margin-top:10px"><a href="https://hybird-code-auditor-bnszutjrt5hfwsqvhwifbt.streamlit.app" target="_blank" rel="noopener">Hybrid Code Auditor</a></h3>
+        <div class="project-sub">Privacy-preserving AI code review — no code leaves your machine</div>
+        <p class="desc">Static analysis meets local LLMs: detects code smells and high cyclomatic complexity in Python via AST analysis, then proposes verified refactorings.</p>
+        <ul>
+          <li>3-agent LLM loop (generate → critique → validate) over local Ollama models</li>
+          <li>FAISS-backed RAG pipeline over PEP 8 and OWASP guidance</li>
+          <li>Automated acceptance gates: complexity &lt; 10, size delta &lt; 20%, valid syntax</li>
+        </ul>
+        <div class="chips">
+          <span class="chip">Python</span><span class="chip">AST</span><span class="chip">Ollama</span>
+          <span class="chip">RAG</span><span class="chip">FAISS</span><span class="chip">Streamlit</span>
+        </div>
+      </div>
+      <div class="project-links">
+        <a class="plink" href="https://hybird-code-auditor-bnszutjrt5hfwsqvhwifbt.streamlit.app" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24"><path d="M14 3h7v7h-2V6.41l-9.29 9.3-1.42-1.42 9.3-9.29H14V3zM5 5h5v2H7v10h10v-3h2v5H5V5z"/></svg>
+          Try it live
+        </a>
+      </div>
+    </div>
+
+    <div class="project">
+      <div>
+        <span class="badge-live"><span class="pulse"></span>LIVE</span>
+        <h3 style="margin-top:10px"><a href="https://hospital-management-system-production-c65e.up.railway.app" target="_blank" rel="noopener">Hospital Management System</a></h3>
+        <div class="project-sub">Modular hospital workflows — patients, doctors, appointments, billing</div>
+        <p class="desc">A Spring Boot MVC system with clean separation of controller, service, and repository layers, deployed on Railway.</p>
+        <ul>
+          <li>OO design patterns — State, Singleton, DI via Spring IoC — with SOLID principles</li>
+          <li>Relational schema in MySQL with JPA/Hibernate entity relationships</li>
+          <li>Custom queries for appointment scheduling and conflict detection</li>
+        </ul>
+        <div class="chips">
+          <span class="chip">Java</span><span class="chip">Spring Boot</span><span class="chip">MySQL</span>
+          <span class="chip">Thymeleaf</span><span class="chip">Maven</span>
+        </div>
+      </div>
+      <div class="project-links">
+        <a class="plink" href="https://hospital-management-system-production-c65e.up.railway.app" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24"><path d="M14 3h7v7h-2V6.41l-9.29 9.3-1.42-1.42 9.3-9.29H14V3zM5 5h5v2H7v10h10v-3h2v5H5V5z"/></svg>
+          Try it live
+        </a>
+      </div>
+    </div>
+
+    <div class="project">
+      <div>
+        <span class="badge-live" style="color:#a78bfa;background:rgba(167,139,250,0.1);border-color:rgba(167,139,250,0.3)"><span class="pulse" style="background:#a78bfa"></span>CAPSTONE</span>
+        <h3 style="margin-top:10px"><a href="https://github.com/PES2UG23CS171" target="_blank" rel="noopener">voiceiso — Real-Time Voice Isolation</a></h3>
+        <div class="project-sub">CPU-only neural denoising · 11.5 → 17.7 dB SI-SDR</div>
+        <p class="desc">A desktop app that streams microphone audio through a multi-stage pipeline — voice-activity detection, noise classification, and a DeepFilterNet3 neural denoiser — in real time, on CPU.</p>
+        <ul>
+          <li>Boosted streaming quality to 17.7 dB SI-SDR (near the 18.0 dB offline bound) by priming inference with recent audio history</li>
+          <li>GUI and audio engine run as separate processes for crash isolation</li>
+          <li>Benchmark harness for SI-SDR, real-time factor, and per-block latency</li>
+        </ul>
+        <div class="chips">
+          <span class="chip">Python</span><span class="chip">PyTorch</span><span class="chip">ONNX Runtime</span>
+          <span class="chip">DSP</span><span class="chip">PyQt6</span>
+        </div>
+      </div>
+      <div class="project-links">
+        <a class="plink" href="https://github.com/PES2UG23CS171" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.55v-2.15c-3.2.7-3.87-1.36-3.87-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.03 1.75 2.69 1.25 3.34.95.1-.74.4-1.25.72-1.54-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.28 1.18-3.09-.12-.29-.51-1.46.11-3.05 0 0 .96-.31 3.16 1.18a11 11 0 0 1 5.76 0c2.19-1.49 3.15-1.18 3.15-1.18.63 1.59.24 2.76.12 3.05.74.81 1.18 1.83 1.18 3.09 0 4.41-2.69 5.38-5.26 5.66.41.36.78 1.05.78 2.13v3.16c0 .3.2.67.8.55A11.52 11.52 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z"/></svg>
+          GitHub
+        </a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section id="education" class="reveal">
+  <div class="section-tag">05 · Education &amp; Honors</div>
+  <h2 class="section-title">Background</h2>
+  <div class="two-col">
+    <div>
+      <div class="edu-item">
+        <h3>B.Tech, Computer Science &amp; Engineering</h3>
+        <div class="org">PES University, Bengaluru</div>
+        <div class="meta">2023 — 2027 (expected) · <span class="score">CGPA 8.7 / 10</span></div>
+      </div>
+      <div class="edu-item">
+        <h3>Pre-University (Class XII)</h3>
+        <div class="org">Chethana PU College</div>
+        <div class="meta">2021 — 2023 · <span class="score">87.5%</span></div>
+      </div>
+      <div class="edu-item">
+        <h3>ICSE (Class X)</h3>
+        <div class="org">Presidency School</div>
+        <div class="meta">2021 · <span class="score">96.6%</span></div>
+      </div>
+    </div>
+    <ul class="ach-list">
+      <li><strong>CNR Rao Merit Scholarship × 3</strong> — awarded for ranking in the top 20% of the cohort at PES University.</li>
+      <li><strong>200+ LeetCode problems</strong> solved in C++ with daily-practice streaks — strongest in DP, backtracking, and graphs.</li>
+      <li class="cert"><strong>Advanced Learning Algorithms</strong> — DeepLearning.AI (Coursera): supervised learning, tree ensembles, neural networks with TensorFlow.</li>
+      <li class="music"><strong>ABRSM Grade 6 Guitar</strong> &amp; Model United Nations participant.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="contact reveal" id="contact">
+  <div class="section-tag" style="text-align:center">06 · Contact</div>
+  <h2 class="section-title" style="text-align:center">Let's build something</h2>
+  <p>
+    I'm open to internships, collaborations, and interesting engineering problems.
+    My inbox is always open — whether you have a question or just want to say hi.
+  </p>
+  <div class="contact-links">
+    <a class="btn primary" href="mailto:dhrushaj.achar@gmail.com">dhrushaj.achar@gmail.com</a>
+    <a class="btn ghost" href="tel:+917338027737">+91 73380 27737</a>
+  </div>
+</section>
+
+<footer>
+  Designed &amp; built by Dhrushaj Achar · <a href="https://github.com/PES2UG23CS171" target="_blank" rel="noopener">GitHub</a> · Bengaluru, India
+</footer>
+
+<script>
+  // scroll progress + nav background
+  const nav = document.getElementById('nav');
+  const progress = document.getElementById('progress');
+  addEventListener('scroll', () => {
+    const h = document.documentElement;
+    progress.style.width = (h.scrollTop / (h.scrollHeight - h.clientHeight) * 100) + '%';
+    nav.classList.toggle('scrolled', h.scrollTop > 30);
+  }, { passive: true });
+
+  // reveal on scroll
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  // typing effect
+  const roles = [
+    'Backend Engineer · Java + Spring Boot',
+    'Real-Time Audio ML · PyTorch + ONNX',
+    'AI Developer Tools · RAG + Local LLMs',
+    'Competitive Programmer · C++',
+  ];
+  const typed = document.getElementById('typed');
+  let ri = 0, ci = 0, deleting = false;
+  (function tick() {
+    const word = roles[ri];
+    typed.textContent = word.slice(0, ci);
+    if (!deleting && ci < word.length) { ci++; setTimeout(tick, 55); }
+    else if (!deleting) { deleting = true; setTimeout(tick, 2000); }
+    else if (ci > 0) { ci--; setTimeout(tick, 28); }
+    else { deleting = false; ri = (ri + 1) % roles.length; setTimeout(tick, 350); }
+  })();
+</script>
+</body>
+</html>
