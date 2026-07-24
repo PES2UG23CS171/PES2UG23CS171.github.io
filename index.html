@@ -71,6 +71,16 @@
     max-width: 15ch;
   }
   .hero h1 em { font-style: italic; font-weight: 500; color: var(--accent); }
+  .hero-role {
+    font-family: var(--serif); font-style: italic; font-size: 1.15rem;
+    color: var(--accent); margin-top: 18px; min-height: 1.6em;
+  }
+  .hero-role .caret {
+    display: inline-block; width: 1px; height: 1.1em; background: var(--accent);
+    vertical-align: text-bottom; margin-left: 2px; animation: blink 1.1s step-end infinite;
+  }
+  @keyframes blink { 50% { opacity: 0; } }
+  @media (prefers-reduced-motion: reduce) { .hero-role .caret { animation: none; } }
   .hero .lede {
     margin-top: 26px; max-width: 56ch; color: var(--muted); font-size: 1.06rem;
   }
@@ -224,6 +234,7 @@
   <div class="hero">
     <div class="kicker">Software Engineer · Bengaluru, India</div>
     <h1>Building software with <em>care</em> and measurable results.</h1>
+    <div class="hero-role"><span id="typed"></span><span class="caret"></span></div>
     <p class="lede">
       Final-year Computer Science undergrad at <strong>PES University</strong>. I've shipped
       diagnostic software for defense systems at <strong>Bharat Electronics</strong>, built a
@@ -418,6 +429,27 @@
     entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
   }, { threshold: 0.1 });
   document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  const roles = [
+    'Backend engineering — Java & Spring Boot',
+    'Real-time audio ML — PyTorch & ONNX',
+    'AI developer tools — RAG & local LLMs',
+    'Competitive programming — C++',
+  ];
+  const typed = document.getElementById('typed');
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    typed.textContent = roles[0];
+  } else {
+    let ri = 0, ci = 0, deleting = false;
+    (function tick() {
+      const word = roles[ri];
+      typed.textContent = word.slice(0, ci);
+      if (!deleting && ci < word.length) { ci++; setTimeout(tick, 55); }
+      else if (!deleting) { deleting = true; setTimeout(tick, 2200); }
+      else if (ci > 0) { ci--; setTimeout(tick, 26); }
+      else { deleting = false; ri = (ri + 1) % roles.length; setTimeout(tick, 400); }
+    })();
+  }
 </script>
 </body>
 </html>
