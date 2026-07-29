@@ -224,7 +224,7 @@
       <a href="#experience">Experience</a>
       <a href="#projects">Projects</a>
       <a href="#education">Education</a>
-      <a class="cta" href="mailto:dhrushaj.achar@gmail.com">Contact</a>
+      <a class="cta" href="mailto:a.dhrushaj@gmail.com">Contact</a>
     </nav>
   </div>
 </header>
@@ -250,7 +250,7 @@
     <div class="metrics">
       <div class="metric"><b>8.7 / 10</b><span>CGPA, PES University</span></div>
       <div class="metric"><b>200+</b><span>LeetCode problems in C++</span></div>
-      <div class="metric"><b>3×</b><span>CNR Rao Merit Scholarship</span></div>
+      <div class="metric"><b>4×</b><span>CNR Rao Merit Scholarship</span></div>
     </div>
   </div>
 
@@ -260,7 +260,7 @@
       <div>
         <p>
           I'm a final-year B.Tech CSE student at <strong>PES University, Bengaluru</strong>
-          (Class of 2027), awarded the CNR Rao Merit Scholarship three times for ranking in
+          (Class of 2027), awarded the CNR Rao Merit Scholarship four times for ranking in
           the top 20% of my cohort.
         </p>
         <p>
@@ -271,8 +271,8 @@
           System — code held to defense-grade reliability standards.
         </p>
         <p>
-          Off the keyboard: ABRSM Grade 6 guitarist, Model UN participant, and a daily
-          LeetCode solver with a soft spot for dynamic programming and graph algorithms.
+          Off the keyboard: ABRSM Grade 6 guitarist and a daily LeetCode solver with a
+          soft spot for dynamic programming and graph algorithms.
         </p>
       </div>
       <figure class="portrait">
@@ -291,15 +291,15 @@
       </div>
       <div class="skill-cell">
         <h3>Backend</h3>
-        <ul><li>Spring Boot &amp; Spring MVC</li><li>JPA / Hibernate</li><li>REST API design</li><li>Maven</li></ul>
+        <ul><li>Spring Boot &amp; Spring MVC</li><li>JPA / Hibernate, REST API design</li><li>Microservices, RabbitMQ</li><li>Maven</li></ul>
       </div>
       <div class="skill-cell">
         <h3>AI / ML &amp; Audio</h3>
-        <ul><li>PyTorch, ONNX Runtime</li><li>scikit-learn</li><li>RAG / FAISS, Ollama</li><li>Real-time audio streaming</li></ul>
+        <ul><li>RAG / FAISS, Ollama</li><li>scikit-learn</li><li>PyTorch, ONNX Runtime</li><li>Real-time audio streaming</li></ul>
       </div>
       <div class="skill-cell">
         <h3>Databases &amp; Tools</h3>
-        <ul><li>MySQL, PostgreSQL</li><li>Git, GitHub Actions</li><li>Docker, Linux</li><li>Postman</li></ul>
+        <ul><li>MySQL, PostgreSQL, Redis</li><li>Docker, Kubernetes, nginx</li><li>Git, GitHub Actions (CI/CD)</li><li>Linux, Postman</li></ul>
       </div>
     </div>
   </section>
@@ -312,8 +312,8 @@
         <h3>Software Engineering Intern</h3>
         <div class="org">Bharat Electronics Limited (BEL), Bengaluru</div>
         <ul>
-          <li>Built front-end diagnostic software for the functional keyboard of the <strong>Akash Weapon System</strong> using Qt/QML, enabling operators to test and validate mission-critical hardware interfaces.</li>
-          <li>Delivered software for a defense production environment under strict reliability and review standards, collaborating with cross-functional hardware and software teams.</li>
+          <li>Built front-end diagnostic software for the <strong>Akash Weapon System's</strong> functional keyboard using Qt/QML in a secure defense environment — no internet or AI tools — working from Qt documentation under senior engineer guidance.</li>
+          <li>Gained hands-on exposure to how secure software and mission-critical defense equipment is engineered, tested, and manufactured.</li>
         </ul>
       </div>
     </div>
@@ -322,6 +322,34 @@
   <section id="projects" class="reveal">
     <div class="sec-head"><span class="sec-num">04</span><h2>Projects</h2></div>
     <div class="project-list">
+
+      <a class="proj" href="https://hospital-management-system-production-c65e.up.railway.app" target="_blank" rel="noopener">
+        <div>
+          <h3>Hospital Management System <span class="tag">Live</span></h3>
+          <div class="stack">Java · Spring Boot · MySQL · Railway</div>
+          <p class="desc">A role-based hospital workflow system — patients, doctors, appointments, billing — built on Spring MVC with clean controller, service, and repository layers.</p>
+          <ul>
+            <li>State, Singleton, and Spring IoC dependency injection under SOLID principles; MySQL schema modeled in JPA/Hibernate with custom scheduling and conflict-check queries</li>
+            <li>68 automated tests (security, CRUD, validation, appointment workflow) on in-memory H2</li>
+            <li>GitHub Actions pipeline builds, tests, and containerises the app on every push in ~80 seconds</li>
+          </ul>
+        </div>
+        <span class="proj-link">Try it live ↗</span>
+      </a>
+
+      <a class="proj" href="https://github.com/PES2UG23CS171/Ticket-Booking" target="_blank" rel="noopener">
+        <div>
+          <h3>Event Ticketing Platform <span class="tag">Microservices</span></h3>
+          <div class="stack">Java · Spring Boot · Docker · Kubernetes · PostgreSQL · Redis · RabbitMQ</div>
+          <p class="desc">An event ticket-booking system built as three Spring Boot microservices — web frontend, booking API, and background worker — behind an nginx reverse proxy, each containerised with Docker.</p>
+          <ul>
+            <li>Asynchronous booking via a RabbitMQ queue: traffic spikes become queue depth instead of database load — absorbed 23,000+ queued bookings, with a row-level lock preventing overselling</li>
+            <li>Catalogue caching and per-client booking rate limits in Redis</li>
+            <li>Deployed on Kubernetes with autoscaling that took the API from 1 to 6 replicas under load and back down</li>
+          </ul>
+        </div>
+        <span class="proj-link">GitHub ↗</span>
+      </a>
 
       <a class="proj" href="https://hybird-code-auditor-bnszutjrt5hfwsqvhwifbt.streamlit.app" target="_blank" rel="noopener">
         <div>
@@ -332,20 +360,6 @@
             <li>Three-agent LLM loop (generate, critique, validate) over local Ollama models</li>
             <li>FAISS-backed RAG pipeline over PEP 8 and OWASP guidance</li>
             <li>Automated acceptance gates: complexity under 10, size delta within 20%, valid syntax</li>
-          </ul>
-        </div>
-        <span class="proj-link">Try it live ↗</span>
-      </a>
-
-      <a class="proj" href="https://hospital-management-system-production-c65e.up.railway.app" target="_blank" rel="noopener">
-        <div>
-          <h3>Hospital Management System <span class="tag">Live</span></h3>
-          <div class="stack">Java · Spring Boot · MySQL · Thymeleaf · Maven</div>
-          <p class="desc">Modular hospital workflows — patients, doctors, appointments, billing — built on MVC with clean controller, service, and repository layers. Deployed on Railway.</p>
-          <ul>
-            <li>State and Singleton patterns with dependency injection via Spring IoC, following SOLID</li>
-            <li>Relational schema with JPA/Hibernate entity relationships</li>
-            <li>Custom queries for appointment scheduling and conflict detection</li>
           </ul>
         </div>
         <span class="proj-link">Try it live ↗</span>
@@ -391,10 +405,11 @@
       </div>
       <div>
         <h3>Honors &amp; Certifications</h3>
-        <div class="ach"><strong>CNR Rao Merit Scholarship × 3</strong> — top 20% of the cohort at PES University.</div>
+        <div class="ach"><strong>CNR Rao Merit Scholarship × 4</strong> — top 20% of the cohort at PES University.</div>
         <div class="ach"><strong>200+ LeetCode problems</strong> in C++ — strongest in dynamic programming, backtracking, and graphs.</div>
         <div class="ach"><strong>Advanced Learning Algorithms</strong> — DeepLearning.AI (Coursera): supervised learning, tree ensembles, neural networks.</div>
-        <div class="ach"><strong>ABRSM Grade 6 Guitar</strong> · Model United Nations participant.</div>
+        <div class="ach"><strong>Self-studied modern LLM concepts</strong> — Transformer architecture, retrieval-augmented generation, model quantization.</div>
+        <div class="ach"><strong>ABRSM Grade 6 Guitar</strong>.</div>
       </div>
     </div>
   </section>
@@ -406,7 +421,7 @@
       The fastest way to reach me is email.
     </p>
     <div class="contact-row">
-      <a class="btn solid" href="mailto:dhrushaj.achar@gmail.com">dhrushaj.achar@gmail.com</a>
+      <a class="btn solid" href="mailto:a.dhrushaj@gmail.com">a.dhrushaj@gmail.com</a>
     </div>
   </section>
 
