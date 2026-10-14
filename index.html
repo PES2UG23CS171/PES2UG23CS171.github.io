@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Dhrushaj Achar — Software Engineer</title>
-<meta name="description" content="Portfolio of Dhrushaj Achar — final-year CS undergrad at PES University. Backend engineering, real-time audio ML, and AI-powered developer tools.">
+<meta name="description" content="Portfolio of Dhrushaj Achar — final-year CS undergrad at PES University. Distributed backends in Spring Boot, systems programming in C++, and LLM agents with real guardrails.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -33,6 +33,10 @@
   }
   h1, h2, h3 { font-family: var(--serif); font-weight: 600; line-height: 1.15; letter-spacing: -0.01em; }
   a { color: inherit; text-decoration: none; }
+  code {
+    font-family: ui-monospace, 'SF Mono', Menlo, monospace; font-size: 0.86em;
+    background: var(--surface); border: 1px solid var(--line); border-radius: 4px; padding: 0 4px;
+  }
   ::selection { background: var(--accent); color: var(--bg); }
 
   .wrap { max-width: 960px; margin: 0 auto; padding: 0 24px; }
@@ -133,7 +137,7 @@
   }
 
   /* ---- skills ---- */
-  .skills { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 0; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
+  .skills { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 0; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
   .skill-cell { padding: 24px; background: var(--bg); border: 0.5px solid var(--line); }
   .skill-cell h3 { font-size: 1rem; margin-bottom: 12px; }
   .skill-cell ul { list-style: none; }
@@ -151,6 +155,7 @@
   .xp li strong { color: var(--text); font-weight: 600; }
 
   /* ---- projects ---- */
+  .proj-intro { color: var(--muted); max-width: 62ch; margin: -20px 0 28px; }
   .project-list { display: flex; flex-direction: column; }
   .proj {
     display: grid; grid-template-columns: 1fr auto; gap: 24px; align-items: start;
@@ -161,6 +166,28 @@
   .proj:last-child { border-bottom: none; }
   .proj:hover { background: var(--surface); }
   .proj h3 { font-size: 1.35rem; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+  .proj-links { display: flex; flex-direction: column; align-items: flex-end; gap: 6px; padding-top: 8px; }
+  .proj-links a {
+    font-size: 0.9rem; font-weight: 500; color: var(--accent); white-space: nowrap;
+    border-bottom: 1px solid transparent; transition: border-color 0.15s;
+  }
+  .proj-links a:hover { border-bottom-color: var(--accent); }
+  @media (max-width: 640px) { .proj-links { flex-direction: row; gap: 18px; padding-top: 0; } }
+
+  .more-head { font-size: 1.15rem; margin: 48px 0 18px; }
+  .more-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 14px; }
+  .card {
+    border: 1px solid var(--line); border-radius: 10px; padding: 22px;
+    display: flex; flex-direction: column; gap: 8px;
+    transition: border-color 0.15s, background 0.15s;
+  }
+  .card:hover { border-color: var(--muted); background: var(--surface); }
+  .card h4 { font-family: var(--serif); font-size: 1.12rem; font-weight: 600; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .card .stack { font-size: 0.78rem; color: var(--muted); }
+  .card p { font-size: 0.9rem; color: var(--muted); flex: 1; }
+  .card-links { display: flex; gap: 16px; margin-top: 6px; }
+  .card-links a { font-size: 0.86rem; font-weight: 500; color: var(--accent); border-bottom: 1px solid transparent; transition: border-color 0.15s; }
+  .card-links a:hover { border-bottom-color: var(--accent); }
   .tag {
     font-size: 0.68rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
     color: var(--accent); background: var(--accent-soft);
@@ -171,13 +198,7 @@
   .proj ul { list-style: none; max-width: 62ch; }
   .proj li { font-size: 0.92rem; color: var(--muted); padding: 3px 0 3px 18px; position: relative; }
   .proj li::before { content: '—'; position: absolute; left: 0; color: var(--accent); }
-  .proj-link {
-    font-size: 0.9rem; font-weight: 500; color: var(--accent); white-space: nowrap;
-    border-bottom: 1px solid transparent; transition: border-color 0.15s;
-    padding-top: 8px;
-  }
-  .proj:hover .proj-link { border-bottom-color: var(--accent); }
-  @media (max-width: 640px) { .proj { grid-template-columns: 1fr; gap: 8px; } .proj-link { padding-top: 0; } }
+  @media (max-width: 640px) { .proj { grid-template-columns: 1fr; gap: 8px; } }
 
   /* ---- education ---- */
   .edu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; }
@@ -238,10 +259,12 @@
     <h1>Building software with <em>care</em> and measurable results.</h1>
     <div class="hero-role"><span id="typed"></span><span class="caret"></span></div>
     <p class="lede">
-      Final-year Computer Science undergrad at <strong>PES University</strong>. I've shipped
-      diagnostic software for defense systems at <strong>Bharat Electronics</strong>, built a
-      real-time neural voice isolator that runs on CPU, and created AI-assisted developer
-      tools — with clean architecture and numbers to back the work.
+      Final-year Computer Science undergrad at <strong>PES University</strong>. I build
+      backends and systems I can explain line by line: a <strong>Redis-compatible server in
+      C++</strong> that the real <code>redis-cli</code> talks to, a <strong>ticketing platform
+      with a payment saga</strong> across four microservices, and an <strong>LLM support
+      agent</strong> that cannot change an order on its own. Before that, defense software
+      at <strong>Bharat Electronics</strong>.
     </p>
     <div class="hero-actions">
       <a class="btn solid" href="#projects">View projects</a>
@@ -251,7 +274,7 @@
     </div>
     <div class="metrics">
       <div class="metric"><b>8.7 / 10</b><span>CGPA, PES University</span></div>
-      <div class="metric"><b>250+</b><span>LeetCode problems in C++</span></div>
+      <div class="metric"><b>300+</b><span>LeetCode problems in C++</span></div>
       <div class="metric"><b>4×</b><span>CNR Rao Merit Scholarship</span></div>
     </div>
   </div>
@@ -266,15 +289,21 @@
           the top 20% of my cohort.
         </p>
         <p>
-          My work spans <strong>backend engineering</strong> with Java and Spring Boot,
-          <strong>real-time audio machine learning</strong> with PyTorch and ONNX Runtime, and
-          <strong>LLM-powered developer tooling</strong> with local models, RAG, and FAISS.
-          At Bharat Electronics Limited, I shipped diagnostic software for the Akash Weapon
-          System — code held to defense-grade reliability standards.
+          My work centres on <strong>backend and systems engineering</strong>: Spring Boot
+          services that have to survive concurrency and partial failure, <strong>C++</strong>
+          down at the socket and data-structure level, and <strong>LLM features</strong> held
+          behind the same authorization and validation as any other caller. I'd rather
+          prove a property with a test than claim it in a README.
         </p>
         <p>
-          Off the keyboard: ABRSM Grade 6 guitarist and a daily LeetCode solver with a
-          soft spot for dynamic programming and graph algorithms.
+          At Bharat Electronics I built diagnostic software for the Akash Weapon System in an
+          air-gapped lab. I arrived having written only C, learnt C++ from offline
+          documentation, and it has been my primary language since.
+        </p>
+        <p>
+          Off the keyboard: ABRSM Grade 6 guitarist — which is why one of my projects is a
+          metronome and tuner — and a daily LeetCode solver with a soft spot for dynamic
+          programming and graph algorithms.
         </p>
       </div>
       <figure class="portrait">
@@ -289,19 +318,27 @@
     <div class="skills">
       <div class="skill-cell">
         <h3>Languages</h3>
-        <ul><li>C++ (primary, DSA)</li><li>Java</li><li>Python</li><li>SQL</li><li>C</li></ul>
+        <ul><li>C++ (primary)</li><li>Java</li><li>SQL, C, Bash</li><li>Python</li></ul>
       </div>
       <div class="skill-cell">
         <h3>Backend</h3>
-        <ul><li>Spring Boot &amp; Spring MVC</li><li>JPA / Hibernate, REST API design</li><li>Microservices, RabbitMQ</li><li>Maven</li></ul>
+        <ul><li>Spring Boot, Spring MVC, Spring Security</li><li>Spring AI, JPA / Hibernate</li><li>REST APIs, WebSockets, microservices</li><li>RabbitMQ, Maven</li></ul>
       </div>
       <div class="skill-cell">
-        <h3>AI / ML &amp; Audio</h3>
-        <ul><li>RAG / FAISS, Ollama</li><li>scikit-learn</li><li>PyTorch, ONNX Runtime</li><li>Real-time audio streaming</li></ul>
+        <h3>Databases &amp; Caching</h3>
+        <ul><li>PostgreSQL (pgvector)</li><li>MySQL</li><li>Redis</li><li>Flyway migrations</li></ul>
       </div>
       <div class="skill-cell">
-        <h3>Databases &amp; Tools</h3>
-        <ul><li>MySQL, PostgreSQL, Redis</li><li>Docker, Kubernetes, nginx</li><li>Git, GitHub Actions (CI/CD)</li><li>Linux, Postman</li></ul>
+        <h3>DevOps &amp; Tools</h3>
+        <ul><li>Docker, Docker Compose</li><li>Kubernetes, nginx</li><li>Git, GitHub Actions (CI/CD)</li><li>Linux, CMake, Postman</li></ul>
+      </div>
+      <div class="skill-cell">
+        <h3>Testing</h3>
+        <ul><li>JUnit, Testcontainers</li><li>Unit / integration / system tests</li><li>Load testing (ApacheBench)</li><li>Sanitizers</li></ul>
+      </div>
+      <div class="skill-cell">
+        <h3>AI / ML</h3>
+        <ul><li>RAG over pgvector, FAISS</li><li>LLM tool-calling</li><li>Prompt-injection guardrails</li><li>OpenAI / Ollama, PyTorch, ONNX</li></ul>
       </div>
     </div>
   </section>
@@ -314,8 +351,9 @@
         <h3>Software Engineering Intern</h3>
         <div class="org">Bharat Electronics Limited (BEL), Bengaluru</div>
         <ul>
-          <li>Built front-end diagnostic software for the <strong>Akash Weapon System's</strong> functional keyboard using Qt/QML in a secure defense environment — no internet or AI tools — working from Qt documentation under senior engineer guidance.</li>
-          <li>Gained hands-on exposure to how secure software and mission-critical defense equipment is engineered, tested, and manufactured.</li>
+          <li>Developed front-end diagnostic software in Qt/QML for the <strong>Akash Weapon System's</strong> functional keyboard, in an air-gapped defense environment with no internet access and no AI tools.</li>
+          <li>Started the internship having written only C; learnt C++ from offline documentation and senior engineer guidance, and it has been my primary language since.</li>
+          <li>Worked to the team's coding standards, code review process and version-control discipline, with strict handling of source and credentials, while seeing the full development lifecycle of mission-critical defense systems.</li>
         </ul>
       </div>
     </div>
@@ -323,63 +361,126 @@
 
   <section id="projects" class="reveal">
     <div class="sec-head"><span class="sec-num">04</span><h2>Projects</h2></div>
+    <p class="proj-intro">The first four are where the depth is. Each repository leads with the reasoning behind its design rather than a feature list.</p>
     <div class="project-list">
 
-      <a class="proj" href="https://hospital-management-system-production-c65e.up.railway.app" target="_blank" rel="noopener">
-        <div>
-          <h3>Hospital Management System <span class="tag">Live</span></h3>
-          <div class="stack">Java · Spring Boot · MySQL · Railway</div>
-          <p class="desc">A role-based hospital workflow system — patients, doctors, appointments, billing — built on Spring MVC with clean controller, service, and repository layers.</p>
-          <ul>
-            <li>State, Singleton, and Spring IoC dependency injection under SOLID principles; MySQL schema modeled in JPA/Hibernate with custom scheduling and conflict-check queries</li>
-            <li>68 automated tests (security, CRUD, validation, appointment workflow) on in-memory H2</li>
-            <li>GitHub Actions pipeline builds, tests, and containerises the app on every push in ~80 seconds</li>
-          </ul>
-        </div>
-        <span class="proj-link">Try it live ↗</span>
-      </a>
-
-      <a class="proj" href="https://github.com/PES2UG23CS171/Ticket-Booking" target="_blank" rel="noopener">
+      <article class="proj">
         <div>
           <h3>Event Ticketing Platform <span class="tag">Microservices</span></h3>
-          <div class="stack">Java · Spring Boot · Docker · Kubernetes · PostgreSQL · Redis · RabbitMQ</div>
-          <p class="desc">An event ticket-booking system built as three Spring Boot microservices — web frontend, booking API, and background worker — behind an nginx reverse proxy, each containerised with Docker.</p>
+          <div class="stack">Java · Spring Boot · PostgreSQL · Redis · RabbitMQ · Docker · Kubernetes</div>
+          <p class="desc">An event-ticketing system split into four Spring Boot microservices — web, order API, booking worker and payments — behind an nginx reverse proxy.</p>
           <ul>
-            <li>Asynchronous booking via a RabbitMQ queue: traffic spikes become queue depth instead of database load — absorbed 23,000+ queued bookings, with a row-level lock preventing overselling</li>
-            <li>Catalogue caching and per-client booking rate limits in Redis</li>
-            <li>Deployed on Kubernetes with autoscaling that took the API from 1 to 6 replicas under load and back down</li>
+            <li>Checkout modelled as a saga with compensating transactions: ten-minute seat holds under <code>SELECT FOR UPDATE</code>, a <code>SKIP LOCKED</code> reaper for abandoned holds, idempotent consumers, and one global lock ordering that prevents deadlocks</li>
+            <li>RabbitMQ turns bursts into queue depth: a 120-second load test queued 23,600+ bookings while the API kept accepting requests; Redis handles catalogue caching and rate limiting</li>
+            <li>Proved seats never oversell — 20 simultaneous bookings on a 5-seat event across 3 worker replicas leave exactly 5 held; Kubernetes HPA scaled the API from 1 to 6 replicas and back</li>
           </ul>
         </div>
-        <span class="proj-link">GitHub ↗</span>
-      </a>
+        <div class="proj-links">
+          <a href="https://github.com/PES2UG23CS171/Ticket-Booking" target="_blank" rel="noopener">Code ↗</a>
+          <a href="https://github.com/PES2UG23CS171/Ticket-Booking/blob/main/docs/PAYMENTS.md" target="_blank" rel="noopener">Payments design ↗</a>
+        </div>
+      </article>
 
-      <a class="proj" href="https://hybird-code-auditor-bnszutjrt5hfwsqvhwifbt.streamlit.app" target="_blank" rel="noopener">
+      <article class="proj">
         <div>
-          <h3>Hybrid Code Auditor <span class="tag">Live</span></h3>
-          <div class="stack">Python · AST analysis · Ollama · RAG · FAISS · Streamlit</div>
-          <p class="desc">Privacy-preserving code review: static analysis finds code smells and high cyclomatic complexity, then local LLMs propose verified refactorings. No code leaves the machine.</p>
+          <h3>Order Support Assistant <span class="tag">LLM agent</span></h3>
+          <div class="stack">Java 21 · Spring Boot · Spring AI · PostgreSQL + pgvector · Testcontainers</div>
+          <p class="desc">An e-commerce support agent that answers policy questions from a retrieved corpus and acts on real orders — without ever being able to change one on its own.</p>
           <ul>
-            <li>Three-agent LLM loop (generate, critique, validate) over local Ollama models</li>
-            <li>FAISS-backed RAG pipeline over PEP 8 and OWASP guidance</li>
-            <li>Automated acceptance gates: complexity under 10, size delta within 20%, valid syntax</li>
+            <li>Five tools go through the same governed service layer as the REST API, so the model gets exactly the authorization, validation and optimistic locking an app gets — and no tool takes a customer id it could be talked into</li>
+            <li>State-changing tools return a proposal token, not a change; a compare-and-set gives exactly-once execution under concurrent approvals, with an append-only audit log of every call, denied ones included</li>
+            <li>RAG over pgvector with verifiable numbered citations; 215 tests across unit, Testcontainers integration and HTTP system suites, gated at 93% line coverage in CI</li>
           </ul>
         </div>
-        <span class="proj-link">Try it live ↗</span>
-      </a>
+        <div class="proj-links">
+          <a href="https://github.com/PES2UG23CS171/order-support-assistant" target="_blank" rel="noopener">Code ↗</a>
+          <a href="https://github.com/PES2UG23CS171/order-support-assistant/blob/main/docs/TECHNICAL-DEEP-DIVE.md" target="_blank" rel="noopener">Deep dive ↗</a>
+        </div>
+      </article>
 
-      <a class="proj" href="https://github.com/PES2UG23CS171" target="_blank" rel="noopener">
+      <article class="proj">
         <div>
-          <h3>voiceiso — Real-Time Voice Isolation <span class="tag">Capstone</span></h3>
-          <div class="stack">Python · PyTorch · ONNX Runtime · DSP · PyQt6</div>
-          <p class="desc">A CPU-only desktop app that streams microphone audio through voice-activity detection, noise classification, and a DeepFilterNet3 neural denoiser — in real time.</p>
+          <h3>Mini-Redis <span class="tag">C++ systems</span></h3>
+          <div class="stack">C++17 · POSIX sockets · kqueue / epoll · CMake</div>
+          <p class="desc">A Redis-compatible in-memory server written from scratch with no third-party dependencies. The stock <code>redis-cli</code> connects unmodified and the official <code>redis-benchmark</code> drives it.</p>
           <ul>
-            <li>Raised streaming quality from 11.5 to 17.7 dB SI-SDR, near the 18.0 dB offline bound, by priming inference with recent audio history</li>
-            <li>GUI and audio engine run as separate processes for crash isolation</li>
-            <li>Benchmark harness measuring SI-SDR, real-time factor, and per-block latency</li>
+            <li>Single-threaded event loop on kqueue / epoll speaking RESP2, with pipelining, backpressure and batched replies</li>
+            <li>Hand-written hash table with incremental rehashing, O(1) random sampling and a bit-reversal <code>SCAN</code> cursor that survives resizes; TTL expiry, six eviction policies including LRU, and append-only persistence with three fsync modes</li>
+            <li>2.52M GETs/sec pipelined and 16 µs unpipelined round trips; 94 tests run on macOS CI under sanitizers</li>
           </ul>
         </div>
-        <span class="proj-link">GitHub ↗</span>
-      </a>
+        <div class="proj-links">
+          <a href="https://github.com/PES2UG23CS171/mini-redis" target="_blank" rel="noopener">Code ↗</a>
+          <a href="https://github.com/PES2UG23CS171/mini-redis#design-notes" target="_blank" rel="noopener">Design notes ↗</a>
+        </div>
+      </article>
+
+      <article class="proj">
+        <div>
+          <h3>Mega Tic Tac Toe <span class="tag">Game AI</span></h3>
+          <div class="stack">Java 21 · Spring Boot 3.5 · WebSockets · vanilla JS</div>
+          <p class="desc">Ultimate tic-tac-toe — nine boards inside one — played online over a shared link, side by side on one device, or against a four-tier computer opponent.</p>
+          <ul>
+            <li>The strongest AI is lazy-SMP alpha-beta: every core searches the whole tree and they cooperate through a lock-free transposition table — about 22 million positions and depth 13 in 2.2 s on ten cores, against 1.3 million and depth 11 single-threaded</li>
+            <li>Every 3×3 grid is a nine-bit mask, so win checks are table lookups; a mutable position with an undo stack and incremental Zobrist hashing lets the search run without allocating per node</li>
+            <li>Authoritative online play over plain WebSockets: the server validates every move, the ply count doubles as a sequence number for gap repair, and seats belong to a token so a refresh rejoins the same game</li>
+          </ul>
+        </div>
+        <div class="proj-links">
+          <a href="https://github.com/PES2UG23CS171/Mega-Tic-Tac-Toe" target="_blank" rel="noopener">Code ↗</a>
+          <a href="https://github.com/PES2UG23CS171/Mega-Tic-Tac-Toe/blob/main/docs/TECHNICAL.md" target="_blank" rel="noopener">Walkthrough ↗</a>
+        </div>
+      </article>
+
+    </div>
+
+    <h3 class="more-head">More projects</h3>
+    <div class="more-grid">
+
+      <article class="card">
+        <h4>voiceiso <span class="tag">Capstone</span></h4>
+        <div class="stack">Python · PyTorch · ONNX Runtime · DSP · PyQt6</div>
+        <p>CPU-only real-time voice isolation built around DeepFilterNet3, with voice-activity detection and noise classification. Raised streaming quality from 11.5 to 17.7 dB SI-SDR, near the 18.0 dB offline bound.</p>
+        <div class="card-links">
+          <a href="https://github.com/PES2UG23CS171/Capstone" target="_blank" rel="noopener">Code ↗</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <h4>Hybrid Code Auditor <span class="tag">Local LLMs</span></h4>
+        <div class="stack">Python · AST · Ollama · RAG · FAISS · Streamlit</div>
+        <p>Privacy-preserving code review: AST analysis flags complexity and code smells, then a generate–critique–validate loop over local LLMs proposes refactors that must pass automated gates.</p>
+        <div class="card-links">
+          <a href="https://github.com/PES2UG23CS171/Hybird-Code-Auditor" target="_blank" rel="noopener">Code ↗</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <h4>Hospital Management System <span class="tag">Full-stack</span></h4>
+        <div class="stack">Java · Spring Boot · MySQL · Thymeleaf</div>
+        <p>Role-based hospital workflows on Spring MVC with State and Singleton patterns, 68 automated tests, and a CI pipeline that builds, tests and containerises every push in about 80 seconds.</p>
+        <div class="card-links">
+          <a href="https://github.com/PES2UG23CS171/Hospital-Management-System" target="_blank" rel="noopener">Code ↗</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <h4>Bluff <span class="tag">Multiplayer</span></h4>
+        <div class="stack">Java 21 · Spring Boot · WebSockets</div>
+        <p>Real-time multiplayer Bluff in the browser: shareable rooms, host-configurable rules, turn timers and vote-kick, with token-based reconnection that puts a refreshed player back in their seat. The rules engine is transport-independent and tested through two real socket clients.</p>
+        <div class="card-links">
+          <a href="https://github.com/PES2UG23CS171/bluff-card-game" target="_blank" rel="noopener">Code ↗</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <h4>T&amp;T Pro <span class="tag">macOS app</span></h4>
+        <div class="stack">Java 21 · Swing · Spring · Java Sound</div>
+        <p>A metronome and guitar tuner packaged as a native Mac app. Beats are placed on a 48 kHz sample timeline that stays within about half a sample across an hour of simulated playback, and the tuner reads synthesized open strings within 0.5 cent using McLeod pitch detection.</p>
+        <div class="card-links">
+          <a href="https://github.com/PES2UG23CS171/T-T-Pro" target="_blank" rel="noopener">Code ↗</a>
+        </div>
+      </article>
 
     </div>
   </section>
@@ -392,7 +493,7 @@
         <div class="edu-item">
           <b>B.Tech, Computer Science &amp; Engineering</b>
           <div class="where">PES University, Bengaluru</div>
-          <div class="meta">2023 — 2027 (expected) · CGPA 8.7 / 10</div>
+          <div class="meta">2023 — Jun 2027 (expected) · CGPA 8.7 / 10</div>
         </div>
         <div class="edu-item">
           <b>Pre-University (Class XII)</b>
@@ -408,8 +509,9 @@
       <div>
         <h3>Honors &amp; Certifications</h3>
         <div class="ach"><strong>CNR Rao Merit Scholarship × 4</strong> — top 20% of the cohort at PES University.</div>
-        <div class="ach"><strong>250+ LeetCode problems</strong> in C++ — strongest in dynamic programming, backtracking, and graphs.</div>
-        <div class="ach"><strong><a href="https://www.coursera.org/account/accomplishments/verify/8F0SQC8D9DAO" target="_blank" rel="noopener">Advanced Learning Algorithms</a></strong> — DeepLearning.AI (Coursera): supervised learning, tree ensembles, neural networks.</div>
+        <div class="ach"><strong>300+ LeetCode problems</strong> in C++ — strongest in dynamic programming, backtracking, and graphs.</div>
+        <div class="ach"><strong><a href="https://coursera.org/share/b7eca2f49b99c54eafae097d13e35e9d" target="_blank" rel="noopener">Supervised Machine Learning: Regression and Classification</a></strong> — DeepLearning.AI (Coursera): regression, gradient descent, regularization, feature engineering.</div>
+        <div class="ach"><strong><a href="https://coursera.org/share/37c172395e7bb931f416340903f7a911" target="_blank" rel="noopener">Advanced Learning Algorithms</a></strong> — DeepLearning.AI (Coursera): neural networks, decision trees and tree ensembles, bias/variance diagnostics.</div>
         <div class="ach"><strong>ABRSM Grade 6 Guitar</strong>.</div>
       </div>
     </div>
@@ -446,10 +548,10 @@
   document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
   const roles = [
-    'Backend engineering — Java & Spring Boot',
-    'Real-time audio ML — PyTorch & ONNX',
-    'AI developer tools — RAG & local LLMs',
-    'Competitive programming — C++',
+    'Distributed backends — Spring Boot & Kubernetes',
+    'Systems programming — C++17',
+    'LLM agents — Spring AI & pgvector',
+    'Game AI — parallel alpha-beta search',
   ];
   const typed = document.getElementById('typed');
   if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
